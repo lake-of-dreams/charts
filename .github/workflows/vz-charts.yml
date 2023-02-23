@@ -13,13 +13,13 @@ on:
       CHART_VERSION:
         type: text
         required: true
-      UPSTREAM_HELM_CHART_REPO_URL:
+      HELM_CHART_REPO_URL:
         type: text
         required: true
       VZ_CHARTS_GITHUB_REPO:
         type: text
         required: true
-        default: "${{ github.repository }}"
+        default: https://github.com/lake-of-dreams/charts
       
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -33,13 +33,44 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
+        name: checkout main repo
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+        name: checkout templates
+        with:
+          ref: templates
+          path: /templates_branch
 
       # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: Create/Update chart directories
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          mkdir -p $GITHUB_WORKSPACE/charts/${{ inputs.CHART_NAME }}/${{ inputs.CHART_VERSION }}
+          mkdir -p $GITHUB_WORKSPACE/testing/${{ inputs.CHART_NAME }}
+          mkdir -p $GITHUB_WORKSPACE/patches/${{ inputs.CHART_NAME }}/${{ inputs.CHART_VERSION }}
+          mkdir -p $GITHUB_WORKSPACE/publish/${{ inputs.CHART_NAME }}
+          cp -n $GITHUB_WORKSPACE/templates_branch/publish/publish.sh $GITHUB_WORKSPACE/publish/${{ inputs.CHART_NAME }}/.
+          cp -n $GITHUB_WORKSPACE/templates_branch/testing/test.sh $GITHUB_WORKSPACE/testing/${{ inputs.CHART_NAME }}/.
+          cp -n $GITHUB_WORKSPACE/templates_branch/patches/build.sh $GITHUB_WORKSPACE/patches/${{ inputs.CHART_NAME }}/.
+          cp -n $GITHUB_WORKSPACE/templates_branch/patches/version/build.sh $GITHUB_WORKSPACE/patches/${{ inputs.CHART_NAME }}/${{ inputs.CHART_VERSION }}/.
+          rm -rf $GITHUB_WORKSPACE/templates_branch
+          
+      - name: Helm tool installer
+        uses: Azure/setup-helm@v3
+        
+      - name: pull helm chart
+        run: |
+          helm repo add ${{ inputs.CHART_NAME }}-provider ${{ inputs.HELM_CHART_REPO_URL }}
+          helm pull --untar --untardir=$GITHUB_WORKSPACE/charts/${{ inputs.CHART_NAME }}/${{ inputs.CHART_VERSION }} ${{ inputs.CHART_NAME }}-provider/keycloak --version ${{ inputs.CHART_VERSION }}
+          mv $GITHUB_WORKSPACE/charts/${{ inputs.CHART_NAME }}/${{ inputs.CHART_VERSION }}/${{ inputs.CHART_NAME }}/* $GITHUB_WORKSPACE/charts/${{ inputs.CHART_NAME }}/${{ inputs.CHART_VERSION }}/.
+          rm -rf $GITHUB_WORKSPACE/charts/${{ inputs.CHART_NAME }}/${{ inputs.CHART_VERSION }}/${{ inputs.CHART_NAME }}
+          
+      - name: push helm chart code
+        uses: actions-x/commit@v6
+          
+          
+          
+        
+        
+          
+          
+          
