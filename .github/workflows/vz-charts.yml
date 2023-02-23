@@ -19,7 +19,7 @@ on:
       VZ_CHARTS_GITHUB_REPO:
         type: text
         required: true
-        default: $GITHUB_REPOSITORY
+        default: "${{ github.repository }}"
       
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
