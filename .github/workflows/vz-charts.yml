@@ -34,6 +34,9 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
         name: checkout main repo
+      - name: Create/Update directory for templates branch
+        run: |
+          mkdir -p $GITHUB_WORKSPACE/templates_branch
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
         name: checkout templates
