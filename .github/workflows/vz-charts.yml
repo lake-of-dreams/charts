@@ -69,6 +69,11 @@ jobs:
           
       - name: push helm chart code
         uses: actions-x/commit@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: 'publish'
+          force-add: 'true'
+         
           
           
           
