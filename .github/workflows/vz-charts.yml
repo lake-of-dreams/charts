@@ -42,7 +42,7 @@ jobs:
         name: checkout templates
         with:
           ref: templates
-          path: /templates_branch
+          path: templates_branch
 
       # Runs a set of commands using the runners shell
       - name: Create/Update chart directories
