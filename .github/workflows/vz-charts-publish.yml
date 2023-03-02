@@ -53,10 +53,12 @@ jobs:
         uses: helm/chart-releaser-action@v1.5.0
         with:
           charts_dir: $GITHUB_WORKSPACE
-          config: cr.yaml
           charts_repo_url: ${{ inputs.HELM_CHART_REPO_URL }}
         env:
           CR_TOKEN: "${{ secrets.GIT_TOKEN }}"
+          CR_OWNER: lake-of-derams
+          CR_GIT_REPO: charts
+          CR_PACKAGE_PATH: $GITHUB_WORKSPACE
           
           
           
