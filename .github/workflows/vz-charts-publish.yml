@@ -47,12 +47,12 @@ jobs:
       - name: package helm chart
         run: |
           helm package $GITHUB_WORKSPACE/charts/${{ inputs.CHART_NAME }}/${{ inputs.CHART_VERSION }} --version ${{ inputs.CHART_VERSION }}+$(git rev-parse --short HEAD)
-          helm repo index . --url ${{ inputs.HELM_CHART_REPO_URL }} --merge  $GITHUB_WORKSPACE/charts/index.yaml
-          helm repo index . --url ${{ inputs.HELM_CHART_REPO_URL }} --merge  $GITHUB_WORKSPACE/charts/${{ inputs.CHART_NAME }}/index.yaml     
+          helm repo index $GITHUB_WORKSPACE/charts --url ${{ inputs.HELM_CHART_REPO_URL }} --merge  $GITHUB_WORKSPACE/charts/index.yaml
+          helm repo index $GITHUB_WORKSPACE/charts --url ${{ inputs.HELM_CHART_REPO_URL }} --merge  $GITHUB_WORKSPACE/charts/${{ inputs.CHART_NAME }}/index.yaml     
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.5.0
         with:
-          charts_dir: $GITHUB_WORKSPACE
+          charts_dir: $GITHUB_WORKSPACE/charts
           charts_repo_url: ${{ inputs.HELM_CHART_REPO_URL }}
         env:
           CR_TOKEN: "${{ secrets.GIT_TOKEN }}"
