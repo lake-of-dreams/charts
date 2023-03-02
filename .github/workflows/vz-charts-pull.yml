@@ -60,11 +60,13 @@ jobs:
       - name: pull helm chart
         run: |
           mkdir -p $GITHUB_WORKSPACE/charts/${{ inputs.CHART_NAME }}/${{ inputs.CHART_VERSION }}
+          rm -rf /tmp/charts/${{ inputs.CHART_NAME }}/${{ inputs.CHART_VERSION }}
+          mkdir -p /tmp/charts/${{ inputs.CHART_NAME }}/${{ inputs.CHART_VERSION }}
           mkdir -p $GITHUB_WORKSPACE/scripts/${{ inputs.CHART_NAME }}/${{ inputs.CHART_VERSION }}
           helm repo add ${{ inputs.CHART_NAME }}-provider ${{ inputs.HELM_CHART_REPO_URL }}
-          helm pull --untar --untardir=$GITHUB_WORKSPACE/charts/${{ inputs.CHART_NAME }}/${{ inputs.CHART_VERSION }} ${{ inputs.CHART_NAME }}-provider/keycloak --version ${{ inputs.CHART_VERSION }}
-          mv -f $GITHUB_WORKSPACE/charts/${{ inputs.CHART_NAME }}/${{ inputs.CHART_VERSION }}/${{ inputs.CHART_NAME }}/* $GITHUB_WORKSPACE/charts/${{ inputs.CHART_NAME }}/${{ inputs.CHART_VERSION }}/.
-          rm -rf $GITHUB_WORKSPACE/charts/${{ inputs.CHART_NAME }}/${{ inputs.CHART_VERSION }}/${{ inputs.CHART_NAME }}
+          helm pull --untar --untardir=/tmp/charts/${{ inputs.CHART_NAME }}/${{ inputs.CHART_VERSION }} ${{ inputs.CHART_NAME }}-provider/keycloak --version ${{ inputs.CHART_VERSION }}
+          mv -f /tmp/charts/${{ inputs.CHART_NAME }}/${{ inputs.CHART_VERSION }}/${{ inputs.CHART_NAME }}/* $GITHUB_WORKSPACE/charts/${{ inputs.CHART_NAME }}/${{ inputs.CHART_VERSION }}/.
+          rm -rf /tmp/charts/${{ inputs.CHART_NAME }}/${{ inputs.CHART_VERSION }}
           cp -n $GITHUB_WORKSPACE/templates_branch/scripts/*.sh $GITHUB_WORKSPACE/scripts/${{ inputs.CHART_NAME }}/.
           cp -n $GITHUB_WORKSPACE/templates_branch/scripts/version/build.sh $GITHUB_WORKSPACE/scripts/${{ inputs.CHART_NAME }}/${{ inputs.CHART_VERSION }}/.
           rm -rf $GITHUB_WORKSPACE/templates_branch
