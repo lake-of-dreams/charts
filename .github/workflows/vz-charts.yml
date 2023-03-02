@@ -10,16 +10,19 @@ on:
       CHART_NAME:
         type: text
         required: true
+        default: keycloak
       CHART_VERSION:
         type: text
         required: true
+        default: 15.1.0
       HELM_CHART_REPO_URL:
         type: text
         required: true
+        default: https://codecentric.github.io/helm-charts
       VZ_CHARTS_GITHUB_REPO:
         type: text
         required: true
-        default: https://github.com/lake-of-dreams/charts
+        default: lake-of-dreams/charts
       
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -35,7 +38,8 @@ jobs:
       - uses: actions/checkout@v3
         name: checkout main repo
         with:
-          token: ${{ secrets.GIT_TOKEN }}
+          token: secrets.GIT_TOKEN
+          repository: inputs.VZ_CHARTS_GITHUB_REPO
       - name: Create/Update directory for templates branch
         run: |
           mkdir -p $GITHUB_WORKSPACE/templates_branch
