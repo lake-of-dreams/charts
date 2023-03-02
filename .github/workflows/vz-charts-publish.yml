@@ -52,6 +52,12 @@ jobs:
           cat $GITHUB_WORKSPACE/charts/index.yaml
           helm repo index $GITHUB_WORKSPACE --url ${{ inputs.HELM_CHART_REPO_URL }} --merge  $GITHUB_WORKSPACE/charts/${{ inputs.CHART_NAME }}/index.yaml
           cat $GITHUB_WORKSPACE/charts/${{ inputs.CHART_NAME }}/index.yaml
+      - name: update index
+        uses: actions-x/commit@v6
+        with:
+          message: 'update index for ${{ inputs.CHART_NAME }} ${{ inputs.CHART_VERSION }}'
+          force: 'true'
+          files: charts/index.yaml charts/${{ inputs.CHART_NAME }}/index.yaml
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.5.0
         with:
