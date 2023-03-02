@@ -69,6 +69,7 @@ jobs:
       - name: pull helm chart
         run: |
           helm repo add ${{ inputs.CHART_NAME }}-provider ${{ inputs.HELM_CHART_REPO_URL }}
+          rm -rf $GITHUB_WORKSPACE/charts/${{ inputs.CHART_NAME }}/${{ inputs.CHART_VERSION }}
           helm pull --untar --untardir=$GITHUB_WORKSPACE/charts/${{ inputs.CHART_NAME }}/${{ inputs.CHART_VERSION }} ${{ inputs.CHART_NAME }}-provider/keycloak --version ${{ inputs.CHART_VERSION }}
           mv -f $GITHUB_WORKSPACE/charts/${{ inputs.CHART_NAME }}/${{ inputs.CHART_VERSION }}/${{ inputs.CHART_NAME }}/* $GITHUB_WORKSPACE/charts/${{ inputs.CHART_NAME }}/${{ inputs.CHART_VERSION }}/.
           rm -rf $GITHUB_WORKSPACE/charts/${{ inputs.CHART_NAME }}/${{ inputs.CHART_VERSION }}/${{ inputs.CHART_NAME }}
