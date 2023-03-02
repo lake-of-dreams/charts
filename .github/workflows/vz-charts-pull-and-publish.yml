@@ -59,10 +59,8 @@ jobs:
         run: |
           mkdir -p $GITHUB_WORKSPACE/charts/${{ inputs.CHART_NAME }}/${{ inputs.CHART_VERSION }}
           mkdir -p $GITHUB_WORKSPACE/scripts/${{ inputs.CHART_NAME }}/${{ inputs.CHART_VERSION }}
-          cp -n $GITHUB_WORKSPACE/templates_branch/publish/publish.sh $GITHUB_WORKSPACE/scripts/${{ inputs.CHART_NAME }}/.
-          cp -n $GITHUB_WORKSPACE/templates_branch/testing/test.sh $GITHUB_WORKSPACE/scripts/${{ inputs.CHART_NAME }}/.
-          cp -n $GITHUB_WORKSPACE/templates_branch/patches/build.sh $GITHUB_WORKSPACE/scripts/${{ inputs.CHART_NAME }}/.
-          cp -n $GITHUB_WORKSPACE/templates_branch/patches/version/build.sh $GITHUB_WORKSPACE/scripts/${{ inputs.CHART_NAME }}/${{ inputs.CHART_VERSION }}/.
+          cp -n $GITHUB_WORKSPACE/templates_branch/scripts/*.sh $GITHUB_WORKSPACE/scripts/${{ inputs.CHART_NAME }}/.
+          cp -n $GITHUB_WORKSPACE/templates_branch/scripts/version/build.sh $GITHUB_WORKSPACE/scripts/${{ inputs.CHART_NAME }}/${{ inputs.CHART_VERSION }}/.
           rm -rf $GITHUB_WORKSPACE/templates_branch
           
       - name: Helm tool installer
@@ -78,8 +76,8 @@ jobs:
       - name: push helm chart code
         uses: actions-x/commit@v6
         with:
-          commit-message: 'publish'
-          force-add: 'true'
+          message: 'add ${{ inputs.CHART_NAME }} ${{ inputs.CHART_VERSION }}'
+          force: 'true'
          
           
           
