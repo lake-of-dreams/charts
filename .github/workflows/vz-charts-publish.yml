@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Pull and Publish
+name: Pull chart
 
 # Controls when the workflow will run
 on:
@@ -21,7 +21,7 @@ on:
         type: string
         required: true
         description: Helm repo url for the chart
-        default: https://codecentric.github.io/helm-charts
+        default: https://lake-of-dreams.github.io/charts
       VZ_CHARTS_GITHUB_REPO:
         type: string
         required: true
