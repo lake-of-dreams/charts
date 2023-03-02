@@ -38,7 +38,7 @@ jobs:
         name: checkout main repo
         with:
           token: ${{ secrets.GIT_TOKEN }}
-          repository: ${{ inputs.VZ_CHARTS_GITHUB_REPO }
+          repository: ${{ inputs.VZ_CHARTS_GITHUB_REPO }}
 
       # Runs a set of commands using the runners shell
       - name: Remove chart directories
