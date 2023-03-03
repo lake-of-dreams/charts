@@ -55,14 +55,13 @@ jobs:
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.5.0
         with:
-          charts_dir: $GITHUB_WORKSPACE
           skip_packaging: true
         env:
           CR_TOKEN: "${{ secrets.GIT_TOKEN }}"
           CR_OWNER: lake-of-derams
           CR_GIT_REPO: charts
-          CR_PACKAGE_PATH: $GITHUB_WORKSPACE
-          CR_INDEX_PATH: $GITHUB_WORKSPACE/charts/index.yaml
+          CR_PACKAGE_PATH: "${{ github.workspace }}"
+          CR_INDEX_PATH: "${{ github.workspace }}/charts/index.yaml"
           
           
           
