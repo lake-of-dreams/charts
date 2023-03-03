@@ -50,9 +50,9 @@ jobs:
           mkdir -p $GITHUB_WORKSPACE/templates_branch
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-        name: checkout templates
+        name: checkout tools
         with:
-          ref: templates
+          ref: tools
           path: templates_branch
           
       - name: Helm tool installer
@@ -70,8 +70,8 @@ jobs:
           helm pull --untar --untardir=/tmp/charts/${{ inputs.CHART_NAME }}/${{ inputs.CHART_VERSION }} ${{ inputs.CHART_NAME }}-provider/keycloak --version ${{ inputs.CHART_VERSION }}
           mv -f /tmp/charts/${{ inputs.CHART_NAME }}/${{ inputs.CHART_VERSION }}/${{ inputs.CHART_NAME }}/* $GITHUB_WORKSPACE/charts/${{ inputs.CHART_NAME }}/${{ inputs.CHART_VERSION }}/.
           rm -rf /tmp/charts/${{ inputs.CHART_NAME }}/${{ inputs.CHART_VERSION }}
-          cp -n $GITHUB_WORKSPACE/templates_branch/scripts/*.sh $GITHUB_WORKSPACE/scripts/${{ inputs.CHART_NAME }}/.
-          cp -n $GITHUB_WORKSPACE/templates_branch/scripts/version/build.sh $GITHUB_WORKSPACE/scripts/${{ inputs.CHART_NAME }}/${{ inputs.CHART_VERSION }}/.
+          cp -n $GITHUB_WORKSPACE/templates_branch/templates/scripts/*.sh $GITHUB_WORKSPACE/scripts/${{ inputs.CHART_NAME }}/.
+          cp -n $GITHUB_WORKSPACE/templates_branch/templates/scripts/version/build.sh $GITHUB_WORKSPACE/scripts/${{ inputs.CHART_NAME }}/${{ inputs.CHART_VERSION }}/.
           rm -rf $GITHUB_WORKSPACE/templates_branch
           
       - name: push helm chart code
@@ -79,6 +79,7 @@ jobs:
         with:
           message: 'add ${{ inputs.CHART_NAME }} ${{ inputs.CHART_VERSION }}'
           force: 'true'
+          branch: ${{ inputs.BRANCH_NAME }}
          
           
           
