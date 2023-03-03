@@ -39,11 +39,12 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-        name: checkout new branch from main repo
+        name: checkout main repo
         with:
           token: ${{ secrets.GIT_TOKEN }}
-          ref: ${{ inputs.BRANCH_NAME }}
-          
+      - name: Create new branch
+        run: |
+          git checkout -b ${{ inputs.BRANCH_NAME }}
       - name: Create/Update directory for templates branch
         run: |
           mkdir -p $GITHUB_WORKSPACE/templates_branch
