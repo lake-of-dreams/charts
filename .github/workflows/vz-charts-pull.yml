@@ -7,6 +7,11 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
     inputs:
+      BRANCH_NAME:
+        type: string
+        required: true
+        description: Name of the new branch
+        default: feature/keycloak-15.1.0
       CHART_NAME:
         type: string
         required: true
@@ -22,12 +27,6 @@ on:
         required: true
         description: Helm repo url for the chart
         default: https://codecentric.github.io/helm-charts
-      VZ_CHARTS_GITHUB_REPO:
-        type: string
-        required: true
-        description: Verrazzano helm charts repo
-        default: lake-of-dreams/charts
-      
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -40,10 +39,11 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-        name: checkout main repo
+        name: checkout new branch from main repo
         with:
           token: ${{ secrets.GIT_TOKEN }}
-          repository: ${{ inputs.VZ_CHARTS_GITHUB_REPO }}
+          ref: ${{ inputs.BRANCH_NAME }}
+          
       - name: Create/Update directory for templates branch
         run: |
           mkdir -p $GITHUB_WORKSPACE/templates_branch
