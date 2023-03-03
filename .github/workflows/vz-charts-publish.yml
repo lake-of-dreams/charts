@@ -43,7 +43,7 @@ jobs:
         name: checkout main repo
         with:
           token: ${{ secrets.GIT_TOKEN }}
-          branch: ${{ inputs.BRANCH_NAME }}
+          ref: ${{ inputs.BRANCH_NAME }}
       - name: package helm chart
         run: |
           helm package $GITHUB_WORKSPACE/charts/${{ inputs.CHART_NAME }}/${{ inputs.CHART_VERSION }} --version ${{ inputs.CHART_VERSION }}+$(git rev-parse --short HEAD)
