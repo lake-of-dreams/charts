@@ -20,10 +20,17 @@ jobs:
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
+      # Was added to fix error https://github.com/helm/chart-releaser-action/issues/74
       - name: Add dependency helm repos
         run: |
           for dir in $(ls -d charts/*/*); do
             helm dependency list $dir 2> /dev/null | tail +2 | head -n 1 | awk '{ print "helm repo add " $1 " " $3 }' | while read cmd; do $cmd; done
+          done
+
+      - name: Remove Chart.lock
+        run: |
+          for dir in $(ls -d charts/*/*); do
+            rm -rf $dir/Chart.lock
           done
 
       - name: Run chart-releaser
