@@ -25,12 +25,9 @@ jobs:
         run: |
           for dir in $(ls -d charts/*/*); do
             helm dependency list $dir 2> /dev/null | tail +2 | head -n 1 | awk '{ print "helm repo add " $1 " " $3 }' | while read cmd; do $cmd; done
-          done
-
-      - name: Remove Chart.lock
-        run: |
-          for dir in $(ls -d charts/*/*); do
-            rm -rf $dir/Chart.lock
+            for subdir in $(ls -d $dir/charts/*); do
+              helm dependency list $subdir 2> /dev/null | tail +2 | head -n 1 | awk '{ print "helm repo add " $1 " " $3 }' | while read cmd; do $cmd; done
+            done
           done
 
       - name: Run chart-releaser
