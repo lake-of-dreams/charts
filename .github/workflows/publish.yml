@@ -30,17 +30,6 @@ jobs:
             done
           done
 
-      - name: Remove .lock files
-        run: |
-          for dir in $(ls -d charts/*/*); do
-            rm -rf $dir/Chart.lock
-            rm -rf $dir/requirements.lock
-            for subdir in $(ls -d $dir/charts/*); do
-              rm -rf $subdir/Chart.lock
-              rm -rf $subdir/requirements.lock
-            done
-          done
-
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.5.0
         with:
