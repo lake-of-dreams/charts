@@ -20,6 +20,7 @@ jobs:
         run: |
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          echo "GITHUB_SHA_SHORT=$(echo $GITHUB_SHA | cut -c 1-6)" >> $GITHUB_ENV
 
       # Was added to fix error https://github.com/helm/chart-releaser-action/issues/74
       - name: Add dependency helm repos
@@ -37,3 +38,4 @@ jobs:
           charts_dir: charts/*
         env:
           CR_TOKEN: "${{ secrets.GIT_TOKEN }}"
+          CR_RELEASE_NAME_TEMPLATE: "{{ .Name }}-{{ .Version }}+${{ env.GITHUB_SHA_SHORT }}"
