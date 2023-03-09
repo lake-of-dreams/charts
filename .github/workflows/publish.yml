@@ -13,6 +13,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
+          # The repo should be checked out with same token for push to gh-pages to work
           token: ${{ secrets.GIT_TOKEN }}
           fetch-depth: 0
 
