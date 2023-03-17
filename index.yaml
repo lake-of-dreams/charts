@@ -88,4 +88,63 @@ entries:
     urls:
     - https://github.com/lake-of-dreams/charts/releases/download/keycloakx-2.1.0+fdd41c/keycloakx-2.1.0.tgz
     version: 2.1.0
-generated: "2023-03-10T10:43:41.024548777Z"
+  - annotations:
+      provenance: |
+        - 2.0.0:
+            upstreamIndexEntry:
+              apiVersion: v2
+              appVersion: 20.0.1
+              created: "2022-12-09T16:04:05.325558945Z"
+              description: Keycloak.X - Open Source Identity and Access Management for Modern Applications and Services
+              digest: 553bab1b738c2ca453a51961113ac71de4cd5909f752c8ab52e6eccf7eb91c44
+              home: https://www.keycloak.org/
+              icon: https://www.keycloak.org/resources/images/keycloak_logo_200px.svg
+              keywords:
+                - sso
+                - idm
+                - openid connect
+                - saml
+                - kerberos
+                - oauth
+                - ldap
+                - keycloakx
+                - quarkus
+              maintainers:
+                - email: thomas.darimont+github@gmail.com
+                  name: thomasdarimont
+              name: keycloakx
+              sources:
+                - https://github.com/codecentric/helm-charts
+                - https://github.com/keycloak/keycloak/tree/main/quarkus/container
+              urls:
+                - https://github.com/codecentric/helm-charts/releases/download/keycloakx-2.0.0/keycloakx-2.0.0.tgz
+              version: 2.0.0
+    apiVersion: v2
+    appVersion: 20.0.1
+    created: "2023-03-17T11:32:28.312006359Z"
+    description: Keycloak.X - Open Source Identity and Access Management for Modern
+      Applications and Services
+    digest: c4a81c73aeb12f4c461fad3937b0b881487b39ce3b86fc5a5da1214f5fa8c35f
+    home: https://www.keycloak.org/
+    icon: https://www.keycloak.org/resources/images/keycloak_logo_200px.svg
+    keywords:
+    - sso
+    - idm
+    - openid connect
+    - saml
+    - kerberos
+    - oauth
+    - ldap
+    - keycloakx
+    - quarkus
+    maintainers:
+    - email: thomas.darimont+github@gmail.com
+      name: thomasdarimont
+    name: keycloakx
+    sources:
+    - https://github.com/codecentric/helm-charts
+    - https://github.com/keycloak/keycloak/tree/main/quarkus/container
+    urls:
+    - https://github.com/lake-of-dreams/charts/releases/download/keycloakx-2.0.0+81ba98/keycloakx-2.0.0.tgz
+    version: 2.0.0
+generated: "2023-03-17T11:32:28.312017559Z"
