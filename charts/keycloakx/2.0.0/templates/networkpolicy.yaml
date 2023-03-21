@@ -24,7 +24,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       ports:
         - protocol: TCP
-          port: 8080
+          port: 8081
         - protocol: TCP
           port: 8443
         {{ range $.Values.extraPorts }}
