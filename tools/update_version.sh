@@ -35,11 +35,11 @@ while getopts 'h:c:v:t:' opt; do
     c)
         chart=${OPTARG}
         ;;
-    v)
-        version=${OPTARG}
-        ;;
     t)
         targetVersion=${OPTARG}
+        ;;
+    v)
+        version=${OPTARG}
         ;;
     h)
         usage
@@ -54,12 +54,13 @@ if [ -z "${chart}" ]; then
     usage 1 "Provide a chart name"
 fi
 
-if [ -z "${version}" ]; then
-    usage 1 "Provide the version of ${chart}"
-fi
 if [ -z "${targetVersion}" ]; then
     usage 1 "Provide the target version to be updated to ${chart} ${version}"
 fi
 
-echo "Updating version of ${chart} ${version} to ${targetVersion}"
-yq -i ".version = \"$targetVersion\"" ${SCRIPT_DIR}/../charts/${chart}/${version}/Chart.yaml
+if [ -z "${version}" ]; then
+    version=${targetVersion}
+fi
+
+echo "Updating version of ${chart} to ${targetVersion} in ${SCRIPT_DIR}/../charts/${chart}/${targetVersion}/Chart.yaml"
+yq -i ".version = \"$targetVersion\"" ${SCRIPT_DIR}/../charts/${chart}/${targetVersion}/Chart.yaml

@@ -4,51 +4,20 @@ description: Keycloak.X - Open Source Identity and Access Management for Modern 
 home: https://www.keycloak.org/
 icon: https://www.keycloak.org/resources/images/keycloak_logo_200px.svg
 keywords:
-  - sso
-  - idm
-  - openid connect
-  - saml
-  - kerberos
-  - oauth
-  - ldap
-  - keycloakx
-  - quarkus
+- sso
+- idm
+- openid connect
+- saml
+- kerberos
+- oauth
+- ldap
+- keycloakx
+- quarkus
 maintainers:
-  - email: thomas.darimont+github@gmail.com
-    name: thomasdarimont
+- email: thomas.darimont+github@gmail.com
+  name: thomasdarimont
 name: keycloakx
 sources:
-  - https://github.com/codecentric/helm-charts
-  - https://github.com/keycloak/keycloak/tree/main/quarkus/container
-version: 0.0.1
-annotations:
-  provenance: |
-    - 2.0.0:
-        upstreamIndexEntry:
-          apiVersion: v2
-          appVersion: 20.0.1
-          created: "2022-12-09T16:04:05.325558945Z"
-          description: Keycloak.X - Open Source Identity and Access Management for Modern Applications and Services
-          digest: 553bab1b738c2ca453a51961113ac71de4cd5909f752c8ab52e6eccf7eb91c44
-          home: https://www.keycloak.org/
-          icon: https://www.keycloak.org/resources/images/keycloak_logo_200px.svg
-          keywords:
-            - sso
-            - idm
-            - openid connect
-            - saml
-            - kerberos
-            - oauth
-            - ldap
-            - keycloakx
-            - quarkus
-          maintainers:
-            - email: thomas.darimont+github@gmail.com
-              name: thomasdarimont
-          name: keycloakx
-          sources:
-            - https://github.com/codecentric/helm-charts
-            - https://github.com/keycloak/keycloak/tree/main/quarkus/container
-          urls:
-            - https://github.com/codecentric/helm-charts/releases/download/keycloakx-2.0.0/keycloakx-2.0.0.tgz
-          version: 2.0.0
+- https://github.com/codecentric/helm-charts
+- https://github.com/keycloak/keycloak/tree/main/quarkus/container
+version: 2.0.0
