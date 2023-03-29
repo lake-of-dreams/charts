@@ -53,4 +53,4 @@ annotations:
   upstreamVersion: "2.0.0"
   upstreamPatch: "patches/keycloakx/0.0.1_upstream_2.0.0.patch"
   appliedPatches: |
-    - patches/keycloakx/
+    - patches/keycloakx/netpol_patch
