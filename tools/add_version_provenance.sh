@@ -78,8 +78,9 @@ wget ${helmIndex} -q -O ${chart}-index.yaml
 echo "Index downloaded."
 rm -rf ${chart}-entry.yaml
 yq e ".entries.\"${chart}\".[] | select(.name == \"${chart}\" and .version == \"${version}\")" ./${chart}-index.yaml >${chart}-entry.yaml
-${SCRIPT_DIR}/add_annotation.sh -c ${chart} -v ${targetVersion} -a "upstreamVersion" -k ${version}
-${SCRIPT_DIR}/add_annotation.sh -c ${chart} -v ${targetVersion} -a "upstreamIndexEntry" -f ${chart}-entry.yaml -m true
+${SCRIPT_DIR}/add_provenance.sh -c ${chart} -v ${targetVersion} -p "upstreamVersion" -k ${version}
+${SCRIPT_DIR}/add_provenance.sh -c ${chart} -v ${targetVersion} -p "upstreamIndexEntry" -f ${chart}-entry.yaml
+${SCRIPT_DIR}/add_provenance.sh -c ${chart} -v ${targetVersion} -p "upstreamChartLocalPath" -k "upstreams/${version}"
 rm -rf ${chart}-index.yaml
 rm -rf ${chart}-entry.yaml
 echo "Version provenance added for ${chart} ${targetVersion}"

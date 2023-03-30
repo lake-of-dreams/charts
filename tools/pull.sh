@@ -7,6 +7,7 @@ chart=
 version=
 helmRepo=
 targetVersion=
+saveUpstream=true
 
 usage() {
     local ec=${1:-0}
@@ -14,12 +15,13 @@ usage() {
     echo """
 usage:
 
-$(basename $0) [-h] [-c chart-name] [-v version] [-t target-version] [-r helm-repo-url]
+$(basename $0) [-h] [-c chart-name] [-v version] [-t target-version] [-r helm-repo-url] [-u save-upstream]
 
 -c Name of chart
 -v Version of chart
 -r helm repo url
 -t target version of chart
+-u whether to save upstream
 
 -h Print this help text
 """
@@ -32,7 +34,7 @@ $(basename $0) [-h] [-c chart-name] [-v version] [-t target-version] [-r helm-re
     exit $ec
 }
 
-while getopts 'h:c:v:r:t:' opt; do
+while getopts 'h:c:v:r:t:u:' opt; do
     case $opt in
     c)
         chart=${OPTARG}
@@ -45,6 +47,9 @@ while getopts 'h:c:v:r:t:' opt; do
         ;;
     t)
         targetVersion=${OPTARG}
+        ;;
+    u)
+        saveUpstream=${OPTARG}
         ;;
     h)
         usage
@@ -78,5 +83,9 @@ helm pull --untar --untardir="${SCRIPT_DIR}/../charts/${chart}/${targetVersion}"
 shopt -s dotglob
 mv ${SCRIPT_DIR}/../charts/${chart}/${targetVersion}/${chart}/* ${SCRIPT_DIR}/../charts/${chart}/${targetVersion}
 rmdir ${SCRIPT_DIR}/../charts/${chart}/${targetVersion}/${chart}
+if [ "${saveUpstream}" == "true" ]; then
+    mkdir -p ${SCRIPT_DIR}/../provenance/${chart}/upstreams/${version}
+    cp -R ${SCRIPT_DIR}/../charts/${chart}/${targetVersion}/* ${SCRIPT_DIR}/../provenance/${chart}/upstreams//${version}/.
+fi
 shopt -u dotglob
 echo "Successfully pulled chart ${chart} ${version} into charts/${chart}/${targetVersion}"
