@@ -3,6 +3,7 @@ SCRIPT_DIR=$(
     cd $(dirname "$0")
     pwd -P
 )
+source ${SCRIPT_DIR}/common.sh
 chart=
 version=
 provenanceName=
@@ -75,6 +76,9 @@ fi
 if [[ -z "${provenanceValue}" && -z "${provenanceValueYamlFile}" ]]; then
     usage 1 "Either provenance value or file containing provenance yaml should be provided."
 fi
+
+install_jq
+install_yq
 
 mkdir -p ${SCRIPT_DIR}/../provenance/${chart}
 touch ${SCRIPT_DIR}/../provenance/${chart}/${version}.yaml

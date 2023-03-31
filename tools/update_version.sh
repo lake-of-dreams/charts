@@ -3,6 +3,7 @@ SCRIPT_DIR=$(
     cd $(dirname "$0")
     pwd -P
 )
+source ${SCRIPT_DIR}/common.sh
 chart=
 version=
 targetVersion=
@@ -61,6 +62,9 @@ fi
 if [ -z "${version}" ]; then
     version=${targetVersion}
 fi
+
+install_jq
+install_yq
 
 echo "Updating version of ${chart} to ${targetVersion} in ${SCRIPT_DIR}/../charts/${chart}/${targetVersion}/Chart.yaml"
 yq -i ".version = \"$targetVersion\"" ${SCRIPT_DIR}/../charts/${chart}/${targetVersion}/Chart.yaml

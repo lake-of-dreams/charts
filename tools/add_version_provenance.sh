@@ -3,6 +3,7 @@ SCRIPT_DIR=$(
     cd $(dirname "$0")
     pwd -P
 )
+source ${SCRIPT_DIR}/common.sh
 chart=
 version=
 targetVersion=
@@ -70,6 +71,9 @@ fi
 if [ -z "${helmIndex}" ]; then
     usage 1 "Provide helm repo index url"
 fi
+
+install_jq
+install_yq
 
 echo "Adding version provenance information for ${chart} ${targetVersion} from ${version}"
 echo "Download index from ${helmIndex}"

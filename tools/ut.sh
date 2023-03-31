@@ -6,7 +6,6 @@ SCRIPT_DIR=$(
 )
 source ${SCRIPT_DIR}/common.sh
 chart=
-testPackage=
 targetVersion=
 
 usage() {
@@ -94,6 +93,7 @@ else
     pip3 install yamale
 fi
 
+install_jq
 install_yq
 install_kubectl
 install_helm

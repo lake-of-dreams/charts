@@ -3,6 +3,7 @@ SCRIPT_DIR=$(
     cd $(dirname "$0")
     pwd -P
 )
+source ${SCRIPT_DIR}/common.sh
 chart=
 version=
 helmRepo=
@@ -76,13 +77,18 @@ if [ -z "${helmRepo}" ]; then
     usage 1 "Provide helm repo url to pull ${chart} ${version}"
 fi
 
+install_jq
+install_yq
+install_kubectl
+install_helm
+
 echo "Pulling ${chart} ${version} from ${helmRepo}."
 rm -rf ${SCRIPT_DIR}/../charts/${chart}/${targetVersion}
 helm repo add ${chart}-provider ${helmRepo}
 helm pull --untar --untardir="${SCRIPT_DIR}/../charts/${chart}/${targetVersion}" ${chart}-provider/${chart} --version ${version}
 shopt -s dotglob
 mv ${SCRIPT_DIR}/../charts/${chart}/${targetVersion}/${chart}/* ${SCRIPT_DIR}/../charts/${chart}/${targetVersion}
-rmdir ${SCRIPT_DIR}/../charts/${chart}/${targetVersion}/${chart}
+rmdir ${SCRIPT_DIR}/../charts/${chart}/$c{targetVersion}/${chart}
 if [ "${saveUpstream}" == "true" ]; then
     mkdir -p ${SCRIPT_DIR}/../provenance/${chart}/upstreams/${version}
     cp -R ${SCRIPT_DIR}/../charts/${chart}/${targetVersion}/* ${SCRIPT_DIR}/../provenance/${chart}/upstreams//${version}/.
