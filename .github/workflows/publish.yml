@@ -39,4 +39,5 @@ jobs:
           charts_dir: charts/*
         env:
           CR_TOKEN: "${{ secrets.GIT_TOKEN }}"
-          CR_RELEASE_NAME_TEMPLATE: "{{ .Name }}-{{ .Version }}+${{ env.GITHUB_SHA_SHORT }}"
+          CR_RELEASE_NAME_TEMPLATE: "{{ .Name }}-{{ .Version }}"
+          CR_SKIP_EXISTING: "false"
