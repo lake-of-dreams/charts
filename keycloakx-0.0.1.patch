@@ -1,0 +1,21 @@
+diff -Naurw /Users/rgsingha/go/src/github.com/lake-of-dreams/charts/tools/../provenance/keycloakx/upstreams/2.0.0/Chart.yaml /Users/rgsingha/go/src/github.com/lake-of-dreams/charts/tools/../charts/keycloakx/0.0.1/Chart.yaml
+--- /Users/rgsingha/go/src/github.com/lake-of-dreams/charts/tools/../provenance/keycloakx/upstreams/2.0.0/Chart.yaml	2023-04-03 09:55:26.000000000 +0530
++++ /Users/rgsingha/go/src/github.com/lake-of-dreams/charts/tools/../charts/keycloakx/0.0.1/Chart.yaml	2023-04-03 09:55:27.000000000 +0530
+@@ -20,4 +20,4 @@
+ sources:
+ - https://github.com/codecentric/helm-charts
+ - https://github.com/keycloak/keycloak/tree/main/quarkus/container
+-version: 2.0.0
++version: 0.0.1
+diff -Naurw /Users/rgsingha/go/src/github.com/lake-of-dreams/charts/tools/../provenance/keycloakx/upstreams/2.0.0/values.yaml /Users/rgsingha/go/src/github.com/lake-of-dreams/charts/tools/../charts/keycloakx/0.0.1/values.yaml
+--- /Users/rgsingha/go/src/github.com/lake-of-dreams/charts/tools/../provenance/keycloakx/upstreams/2.0.0/values.yaml	2023-04-03 09:55:26.000000000 +0530
++++ /Users/rgsingha/go/src/github.com/lake-of-dreams/charts/tools/../charts/keycloakx/0.0.1/values.yaml	2023-04-03 09:56:14.000000000 +0530
+@@ -236,7 +236,7 @@
+   # The HTTP Service node port if type is NodePort
+   httpNodePort: null
+   # The HTTPS Service port
+-  httpsPort: 8443
++  httpsPort: 7443
+   # The HTTPS Service node port if type is NodePort
+   httpsNodePort: null
+   # Additional Service ports, e. g. for custom admin console

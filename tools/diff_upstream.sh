@@ -79,14 +79,14 @@ if [ -z "${upstream_chart_local_dir}" ]; then
     exit 1
 fi
 
-upstream_chart_local_dir="${SCRIPT_DIR}/../provenance/${upstream_chart_local_dir}"
+upstream_chart_local_dir="${SCRIPT_DIR}/../provenance/${chart}/${upstream_chart_local_dir}"
 if [ ! -d "${upstream_chart_local_dir}" ]; then
     echo "${upstream_chart_local_dir} does not exist."
     exit 1
 fi
 
 diff -Naurw ${upstream_chart_local_dir} ${SCRIPT_DIR}/../charts/${chart}/${targetVersion} >${patchFile}
-if [ -f "${patchFile}"]; then
+if [ -f "${patchFile}" ]; then
     echo "Patch file generated at ${patchFile}"
 else
     echo "Failed generating patch file at ${patchFile}"
