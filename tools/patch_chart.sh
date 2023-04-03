@@ -64,7 +64,7 @@ if [ -z "${patchFile}" ]; then
     usage 1 "Provide the patch file location"
 fi
 
-if [ ! -f "${patchFile}"]; then
+if [ ! -f "${patchFile}" ]; then
     echo "patch file does not exist at ${patchFile}"
     exit 1
 fi
