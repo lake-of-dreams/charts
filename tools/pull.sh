@@ -6,7 +6,7 @@ SCRIPT_DIR=$(
 source ${SCRIPT_DIR}/common.sh
 chart=
 version=
-helmRepo=
+helmRepoURL=
 targetVersion=
 saveUpstream=true
 
@@ -44,7 +44,7 @@ while getopts 'h:c:v:r:t:u:' opt; do
         version=${OPTARG}
         ;;
     r)
-        helmRepo=${OPTARG}
+        helmRepoURL=${OPTARG}
         ;;
     t)
         targetVersion=${OPTARG}
@@ -73,7 +73,7 @@ if [ -z "${targetVersion}" ]; then
     targetVersion=${version}
 fi
 
-if [ -z "${helmRepo}" ]; then
+if [ -z "${helmRepoURL}" ]; then
     usage 1 "Provide helm repo url to pull ${chart} ${version}"
 fi
 
@@ -82,10 +82,18 @@ install_yq
 install_kubectl
 install_helm
 
-echo "Pulling ${chart} ${version} from ${helmRepo}."
+echo "Pulling ${chart} ${version} from ${helmRepoURL}."
+helmRepo=$(helm repo list | grep ${helmRepoURL} | cut -f1 | xargs)
+if [ ! -z "${helmRepo}" ]; then
+    echo "Using existing ${helmRepo} repository"
+else
+    helmRepo="${chart}-${version}-provider"
+    echo "Adding ${helmRepo} helm repository"
+    helm repo add ${helmRepo} ${helmRepoURL}
+fi
+helm repo update ${helmRepo}
 rm -rf ${SCRIPT_DIR}/../charts/${chart}/${targetVersion}
-helm repo add ${chart}-provider ${helmRepo}
-helm pull --untar --untardir="${SCRIPT_DIR}/../charts/${chart}/${targetVersion}" ${chart}-provider/${chart} --version ${version}
+helm pull --untar --untardir="${SCRIPT_DIR}/../charts/${chart}/${targetVersion}" ${helmRepo}/${chart} --version ${version}
 shopt -s dotglob
 mv ${SCRIPT_DIR}/../charts/${chart}/${targetVersion}/${chart}/* ${SCRIPT_DIR}/../charts/${chart}/${targetVersion}
 rmdir ${SCRIPT_DIR}/../charts/${chart}/${targetVersion}/${chart}
