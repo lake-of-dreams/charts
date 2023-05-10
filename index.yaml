@@ -3,6 +3,62 @@ entries:
   keycloakx:
   - apiVersion: v2
     appVersion: 20.0.1
+    created: "2023-05-10T15:00:41.203802761Z"
+    description: Keycloak.X - Open Source Identity and Access Management for Modern
+      Applications and Services
+    digest: 0c92cda95bbcb60864f32e3fcd6d1f448ad1c22f894c5215c3858f77b2aa4b5b
+    home: https://www.keycloak.org/
+    icon: https://www.keycloak.org/resources/images/keycloak_logo_200px.svg
+    keywords:
+    - sso
+    - idm
+    - openid connect
+    - saml
+    - kerberos
+    - oauth
+    - ldap
+    - keycloakx
+    - quarkus
+    maintainers:
+    - email: thomas.darimont+github@gmail.com
+      name: thomasdarimont
+    name: keycloakx
+    sources:
+    - https://github.com/codecentric/helm-charts
+    - https://github.com/keycloak/keycloak/tree/main/quarkus/container
+    urls:
+    - https://github.com/lake-of-dreams/charts/releases/download/keycloakx-2.1.0/keycloakx-2.1.0.tgz
+    version: 2.1.0
+  - apiVersion: v2
+    appVersion: 20.0.1
+    created: "2023-05-10T15:00:41.090089243Z"
+    description: Keycloak.X - Open Source Identity and Access Management for Modern
+      Applications and Services
+    digest: 7b2eb0db089184cd039f09bbb40f089680c8a475418e5a09eb1d3ec6115e89c0
+    home: https://www.keycloak.org/
+    icon: https://www.keycloak.org/resources/images/keycloak_logo_200px.svg
+    keywords:
+    - sso
+    - idm
+    - openid connect
+    - saml
+    - kerberos
+    - oauth
+    - ldap
+    - keycloakx
+    - quarkus
+    maintainers:
+    - email: thomas.darimont+github@gmail.com
+      name: thomasdarimont
+    name: keycloakx
+    sources:
+    - https://github.com/codecentric/helm-charts
+    - https://github.com/keycloak/keycloak/tree/main/quarkus/container
+    urls:
+    - https://github.com/lake-of-dreams/charts/releases/download/keycloakx-2.0.0/keycloakx-2.0.0.tgz
+    version: 2.0.0
+  - apiVersion: v2
+    appVersion: 20.0.1
     created: "2023-04-11T13:14:03.871945424Z"
     description: Keycloak.X - Open Source Identity and Access Management for Modern
       Applications and Services
@@ -29,4 +85,4 @@ entries:
     urls:
     - https://github.com/lake-of-dreams/charts/releases/download/keycloakx-0.0.1/keycloakx-0.0.1.tgz
     version: 0.0.1
-generated: "2023-04-11T13:14:03.871957324Z"
+generated: "2023-05-10T15:00:41.203819361Z"
