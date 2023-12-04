@@ -1,0 +1,44 @@
+upstreamVersion: 2.0.0
+upstreamChartLocalPath: upstreams/2.0.0
+upstreamIndexEntry:
+    metadata:
+        name: keycloakx
+        home: https://www.keycloak.org/
+        sources:
+            - https://github.com/codecentric/helm-charts
+            - https://github.com/keycloak/keycloak/tree/main/quarkus/container
+        version: 2.0.0
+        description: Keycloak.X - Open Source Identity and Access Management for Modern Applications and Services
+        keywords:
+            - sso
+            - idm
+            - openid connect
+            - saml
+            - kerberos
+            - oauth
+            - ldap
+            - keycloakx
+            - quarkus
+        maintainers:
+            - name: thomasdarimont
+              email: thomas.darimont+github@gmail.com
+              url: ""
+        icon: https://www.keycloak.org/resources/images/keycloak_logo_200px.svg
+        apiversion: v2
+        condition: ""
+        tags: ""
+        appversion: 20.0.1
+        deprecated: false
+        annotations: {}
+        kubeversion: ""
+        dependencies: []
+        type: ""
+    urls:
+        - https://github.com/codecentric/helm-charts/releases/download/keycloakx-2.0.0/keycloakx-2.0.0.tgz
+    created: 2022-12-09T16:04:05.325558945Z
+    removed: false
+    digest: 553bab1b738c2ca453a51961113ac71de4cd5909f752c8ab52e6eccf7eb91c44
+    checksumdeprecated: ""
+    enginedeprecated: ""
+    tillerversiondeprecated: ""
+    urldeprecated: ""
